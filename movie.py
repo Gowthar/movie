@@ -1,6 +1,7 @@
-import numpy
+import numpy as np
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
+import pandas as pd
 
 def get_accuracy(predicted, expected):
     count = 0.0
@@ -79,8 +80,31 @@ class KNNClassifier:
         return KNNModel(data, targets)
 
 
-def main():
+
+#data = pd.read_csv('adult.data.csv', names = ['age','workclass','fnlwgt','education','education-num','marital-status','occupation','relationship','race','sex','capital-gain','capital-loss','hours-per-week','native-country','#'])
+
+#def get_data_car(filename):
+ #   data = pd.read_csv(filename)
+  #  print(data)
+
+
+#def main():
+############Read in label columns#################
+data = pd.read_csv('car.data', names = ['buying','maint','doors','persons','lug_boot','safety'], index_col=False)
+######################Replacing objects with numeric scales#############################
+data['buying'].replace(to_replace=['vhigh','high','med','low'], value =[4,3,2,1], inplace=True)
+data['maint' ].replace(to_replace=['vhigh','high','med','low'], value =[4,3,2,1], inplace=True)
+data['doors'].replace(to_replace=['2','3','4','5more'], value =[1,2,3,4], inplace=True)
+data['persons'].replace(to_replace=['2','4','more'], value =[1,2,3], inplace=True)
+data['lug_boot'].replace(to_replace=['small','med','big'], value =[1,2,3], inplace=True)
+data['safety'].replace(to_replace=['low','med','high'], value =[1,2,3], inplace=True)
+#print(data.head(5))
+######################Converting Pandas to nparray############################################
+data = data.values
+print(data)
+
     # Load the datasets
+'''
     iris = datasets.load_iris()
     data = iris.data
     target = iris.target
@@ -96,8 +120,9 @@ def main():
     model = classifier.fit(data_train, targets_train)
     targets_predicted = model.predict(data_test)
     print(get_accuracy(targets_predicted, targets_test))
+'''
 
-
-main()
+#if __name__ == "__main__":
+    #main()
 
 #Worked with Josh Backstein

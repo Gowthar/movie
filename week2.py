@@ -97,7 +97,4 @@ def main():
     targets_predicted = model.predict(data_test)
     print(get_accuracy(targets_predicted, targets_test))
 
-
 main()
-
-#Worked with Josh Backstein
